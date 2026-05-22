@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fundamentos Teóricos - Proyecto EGI-1</title>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <h1 data-es="APM Solutions" data-en="APM Solutions">APM Solutions</h1>
+    </header>
+
+    <nav>
+        <a href="index.html" data-es="Funcionamiento Grúa" data-en="Crane Operation">Funcionamiento Grúa</a>
+        <a href="utilidad.html" data-es="Utilidad" data-en="Utility">Utilidad</a>
+        <a href="fundamentos.html" class="active" data-es="Fundamentos Teóricos" data-en="Theoretical Foundations">Fundamentos Teóricos</a>
+        <a href="construccion.html" data-es="Proceso de Construcción" data-en="Construction Process">Proceso de Construcción</a>
+        <a href="quienes-somos.html" data-es="Quiénes Somos" data-en="About Us">Quiénes Somos</a>
+        
+      <div class="lang-selector">
+            <button onclick="cambiarIdioma('es')" id="btn-es" class="btn-lang active-lang" title="Español">
+                <img src="https://flagcdn.com/w40/es.png" alt="ES" class="flag-img">
+            </button>
+            <button onclick="cambiarIdioma('en')" id="btn-en" class="btn-lang" title="English">
+                <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="flag-img">
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h2 data-es="3. Fundamentos Teóricos" data-en="3. Theoretical Foundations">3. Fundamentos Teóricos</h2>
+            
+            <h3 data-es="3.1 Electrónica" data-en="3.1 Electronics">3.1 Electrónica</h3>
+            <p data-es="Utilizamos la electrónica como una de las principales bases del proyecto. Para el caso de los camiones, realizamos una batería soldando los conectores correspondientes bajo los principios de Corriente Continua y la suma de voltaje en serie."
+               data-en="We utilized electronics as one of the main foundations of this project. For the RC trucks, we built a battery pack by welding the corresponding connectors based on Direct Current (DC) principles and voltage summation in series.">Utilizamos la electrónica como una de las principales bases del proyecto. Para el caso de los camiones, realizamos una batería soldando los conectores correspondientes bajo los principios de Corriente Continua y la suma de voltaje en serie.</p>
+            <p data-es="Para el electroimán de la grúa, diseñamos y construimos un rectificador de onda utilizando conocimientos de prácticas sobre diodos, capacitores y resistencias, lo que nos permite aprovechar la corriente alterna generada y transformarla para alimentar el electroimán de manera estable. Los motores de CC se alimentan mediante un transformador de 24V (similar a cargadores de notebooks) acoplado a un puente H."
+               data-en="For the crane's electromagnet, we designed and constructed a wave rectifier by applying experimental knowledge regarding diodes, capacitors, and resistors. This allows us to harness the generated alternating current and convert it to power the electromagnet stably. The DC motors are powered through a 24V transformer (similar to notebook chargers) coupled with an H-bridge.">Para el electroimán de la grúa, diseñamos y construimos un rectificador de onda utilizando conocimientos de prácticas sobre diodos, capacitores y resistencias, lo que nos permite aprovechar la corriente alterna generada y transformarla para alimentar el electroimán de manera estable. Los motores de CC se alimentan mediante un transformador de 24V (similar a cargadores de notebooks) acoplado a un puente H.</p>
+
+            <h3 data-es="3.2 Arquitectura de Computadoras" data-en="3.2 Computer Architecture">3.2 Architecture de Computadoras</h3>
+            <p data-es="El Arduino actúa como el cerebro de la funcionalidad de nuestra grúa. Almacena el código programado en su memoria interna, permitiendo controlar las revoluciones por minuto (RPM) y la dirección de giro de los motores conectados al puente H. Asimismo, el tablero de control aprovecha las entradas analógicas del microchip para procesar las órdenes de los 5 interruptores."
+               data-en="The Arduino acts as the brain behind our crane's functionality. It stores the programmed code within its internal memory, allowing control over the revolutions per minute (RPM) and the rotation direction of the motors connected to the H-bridge. Likewise, the control panel utilizes the microcontroller's analog inputs to process commands from the 5 switches.">El Arduino actúa como el cerebro de la funcionalidad de nuestra grúa. Almacena el código programado en su memoria interna, permitiendo controlar las revoluciones por minuto (RPM) y la dirección de giro de los motores conectados al puente H. Asimismo, el tablero de control aprovecha las entradas analógicas del microchip para procesar las órdenes de los 5 interruptores.</p>
+
+            <h3 data-es="3.3 Matemática" data-en="3.3 Mathematics">3.3 Matemática</h3>
+            <div class="placeholder-box">
+                <p data-es="Sección destinada para incorporar las matrices de control, cálculos geométricos de los ejes o las ecuaciones del sistema mecánico."
+                   data-en="Section intended for incorporating control matrices, geometric calculations of the shafts, or mechanical system equations.">Sección destinada para incorporar las matrices de control, cálculos geométricos de los ejes o las ecuaciones del sistema mecánico.</p>
+            </div>
+
+            <h3 data-es="3.4 Física" data-en="3.4 Physics">3.4 Física</h3>
+            <div class="placeholder-box">
+                <p data-es="Sección destinada para el desarrollo de los principios de electromagnetismo (campo magnético del electroimán) y cálculos de torque/fuerzas aplicados en el brazo de la grúa."
+                   data-en="Section intended for developing electromagnetism principles (electromagnet magnetic field) and torque/forces calculations applied to the crane arm.">Sección destinada para el desarrollo de los principios de electromagnetismo (campo magnético del electroimán) y cálculos de torque/fuerzas aplicados en el brazo de la grúa.</p>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        function cambiarIdioma(lang) {
+            localStorage.setItem('idiomaPreferido', lang);
+            document.querySelectorAll('[data-es]').forEach(elemento => {
+                elemento.textContent = elemento.getAttribute(`data-${lang}`);
+            });
+            document.getElementById('btn-es').classList.remove('active-lang');
+            document.getElementById('btn-en').classList.remove('active-lang');
+            document.getElementById(`btn-${lang}`).classList.add('active-lang');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const idiomaGuardado = localStorage.getItem('idiomaPreferido') || 'es';
+            cambiarIdioma(idiomaGuardado);
+        });
+
+        let ubicacionPrincipal = window.scrollY;
+        let nav = document.querySelector('nav');
+        const umbralDeslizamiento = 25; 
+
+        window.onscroll = function() {
+            let desplazamientoActual = window.scrollY;
+            if (window.innerWidth <= 768) {
+                let diferencia = Math.abs(desplazamientoActual - ubicacionPrincipal);
+                if (diferencia > umbralDeslizamiento) {
+                    if (ubicacionPrincipal > desplazamientoActual) {
+                        nav.style.top = '0';
+                    } else {
+                        nav.style.top = '-350px'; 
+                    }
+                    ubicacionPrincipal = desplazamientoActual;
+                }
+            } else {
+                nav.style.top = '0';
+                ubicacionPrincipal = desplazamientoActual;
+            }
+        }
+    </script>
+</body>
+</html>

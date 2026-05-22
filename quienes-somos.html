@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiénes Somos - Proyecto EGI-1</title>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <h1 data-es="APM Solutions" data-en="APM Solutions">APM Solutions</h1>
+    </header>
+
+    <nav>
+        <a href="index.html" data-es="Funcionamiento Grúa" data-en="Crane Operation">Funcionamiento Grúa</a>
+        <a href="utilidad.html" data-es="Utilidad" data-en="Utility">Utilidad</a>
+        <a href="fundamentos.html" data-es="Fundamentos Teóricos" data-en="Theoretical Foundations">Fundamentos Teóricos</a>
+        <a href="construccion.html" data-es="Proceso de Construcción" data-en="Construction Process">Proceso de Construcción</a>
+        <a href="quienes-somos.html" class="active" data-es="Quiénes Somos" data-en="About Us">Quiénes Somos</a>
+        
+       <div class="lang-selector">
+            <button onclick="cambiarIdioma('es')" id="btn-es" class="btn-lang active-lang" title="Español">
+                <img src="https://flagcdn.com/w40/es.png" alt="ES" class="flag-img">
+            </button>
+            <button onclick="cambiarIdioma('en')" id="btn-en" class="btn-lang" title="English">
+                <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="flag-img">
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h2 data-es="5. Equipo de Desarrollo" data-en="5. Development Team">5. Equipo de Desarrollo</h2>
+            <p data-es="Somos estudiantes de la tecnicatura en Redes de Datos y Telecomunicaciones del Instituto Técnico Universitario (ITU - UNCuyo). Este proyecto representa la integración de los conocimientos prácticos y teóricos desarrollados a lo largo del trayecto académico." 
+               data-en="We are students of the Higher Technical Degree in Data Networks and Telecommunications at the Instituto Técnico Universitario (ITU - UNCuyo). This project represents the integration of practical and theoretical knowledge developed throughout our academic path.">Somos estudiantes de la tecnicatura en Redes de Datos y Telecomunicaciones del Instituto Técnico Universitario (ITU - UNCuyo). Este proyecto representa la integración de los conocimientos prácticos y teóricos desarrollados a lo largo del trayecto académico.</p>
+            
+            <h3 data-es="Integrantes:" data-en="Team Members:">Integrantes:</h3>
+            <ul>
+                <li><strong>Beccari Benjamin</strong></li>
+                <li><strong>Montenegro Tomas</strong></li>
+                <li><strong>Lopez Jorge</strong></li>
+                <li><strong>Lopez Prada Nicolas</strong></li>
+                <li><strong>Loprestti Luciano</strong></li>
+                <li><strong>Rubio Javier</strong></li>
+                <li><strong>Zapata Joaquin</strong></li>
+            </ul>
+
+            <h3 data-es="Institución:" data-en="Institution:">Institución:</h3>
+            <p data-es="Instituto Técnico Universitario, Universidad Nacional de Cuyo. Mendoza, Argentina." 
+               data-en="Instituto Técnico Universitario, Universidad Nacional de Cuyo. Mendoza, Argentina.">Instituto Técnico Universitario, Universidad Nacional de Cuyo.<br>Mendoza, Argentina.</p>
+
+            <img src="logoitu.png" alt="Logo ITU - UNCuyo" style="max-width: 250px; display: block; margin: 2rem auto 0 auto; border-radius: 4px;">
+
+        </article>
+    </main>
+
+    <script>
+        function cambiarIdioma(lang) {
+            localStorage.setItem('idiomaPreferido', lang);
+            document.querySelectorAll('[data-es]').forEach(elemento => {
+                elemento.textContent = elemento.getAttribute(`data-${lang}`);
+            });
+            document.getElementById('btn-es').classList.remove('active-lang');
+            document.getElementById('btn-en').classList.remove('active-lang');
+            document.getElementById(`btn-${lang}`).classList.add('active-lang');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const idiomaGuardado = localStorage.getItem('idiomaPreferido') || 'es';
+            cambiarIdioma(idiomaGuardado);
+        });
+
+        let ubicacionPrincipal = window.scrollY;
+        let nav = document.querySelector('nav');
+        const umbralDeslizamiento = 25; 
+
+        window.onscroll = function() {
+            let desplazamientoActual = window.scrollY;
+            if (window.innerWidth <= 768) {
+                let diferencia = Math.abs(desplazamientoActual - ubicacionPrincipal);
+                if (diferencia > umbralDeslizamiento) {
+                    if (ubicacionPrincipal > desplazamientoActual) {
+                        nav.style.top = '0';
+                    } else {
+                        nav.style.top = '-350px'; 
+                    }
+                    ubicacionPrincipal = desplazamientoActual;
+                }
+            } else {
+                nav.style.top = '0';
+                ubicacionPrincipal = desplazamientoActual;
+            }
+        }
+    </script>
+</body>
+</html>

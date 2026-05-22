@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proceso de Construcción - Proyecto EGI-1</title>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <h1 data-es="APM Solutions" data-en="APM Solutions">APM Solutions</h1>
+    </header>
+
+    <nav>
+        <a href="index.html" data-es="Funcionamiento Grúa" data-en="Crane Operation">Funcionamiento Grúa</a>
+        <a href="utilidad.html" data-es="Utilidad" data-en="Utility">Utilidad</a>
+        <a href="fundamentos.html" data-es="Fundamentos Teóricos" data-en="Theoretical Foundations">Fundamentos Teóricos</a>
+        <a href="construccion.html" class="active" data-es="Proceso de Construcción" data-en="Construction Process">Proceso de Construcción</a>
+        <a href="quienes-somos.html" data-es="Quiénes Somos" data-en="About Us">Quiénes Somos</a>
+        
+        <div class="lang-selector">
+            <button onclick="cambiarIdioma('es')" id="btn-es" class="btn-lang active-lang" title="Español">
+                <img src="https://flagcdn.com/w40/es.png" alt="ES" class="flag-img">
+            </button>
+            <button onclick="cambiarIdioma('en')" id="btn-en" class="btn-lang" title="English">
+                <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="flag-img">
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h2 data-es="4. Proceso de Construcción" data-en="4. Construction Process">4. Proceso de Construcción</h2>
+            <p data-es="En este espacio se documentará detalladamente la evolución técnica del proyecto, desde los diagramas iniciales hasta el prototipo final." 
+               data-en="In this section, the technical evolution of the project will be documented in detail, from the initial diagrams to the final prototype.">En este espacio se documentará detalladamente la evolución técnica del proyecto, desde los diagramas iniciales hasta el prototipo final.</p>
+            
+            <div class="placeholder-box">
+                <h3 data-es="Próximamente:" data-en="Coming Soon:">Próximamente:</h3>
+                <ul>
+                    <li data-es="Diseño de la estructura metálica y soldadura del eje." data-en="Metallic structure design and shaft welding.">Diseño de la estructura metálica y soldadura del eje.</li>
+                    <li data-es="Montaje de la roldana y acople de los motores de CC." data-en="Sheave assembly and DC motor coupling.">Montaje de la roldana y acople de los motores de CC.</li>
+                    <li data-es="Esquema de conexiones del circuito eléctrico, puente H y Arduino." data-en="Electrical circuit wiring diagrams, H-bridge, and Arduino.">Esquema de conexiones del circuito eléctrico, puente H y Arduino.</li>
+                    <li data-es="Construcción del rectificador para el electroimán." data-en="Construction of the rectifier system for the electromagnet.">Construcción del rectificador para el electroimán.</li>
+                </ul>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        // --- SISTEMA DE IDIOMAS ---
+        function cambiarIdioma(lang) {
+            localStorage.setItem('idiomaPreferido', lang);
+            document.querySelectorAll('[data-es]').forEach(elemento => {
+                elemento.textContent = elemento.getAttribute(`data-${lang}`);
+            });
+            document.getElementById('btn-es').classList.remove('active-lang');
+            document.getElementById('btn-en').classList.remove('active-lang');
+            document.getElementById(`btn-${lang}`).classList.add('active-lang');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const idiomaGuardado = localStorage.getItem('idiomaPreferido') || 'es';
+            cambiarIdioma(idiomaGuardado);
+        });
+
+        let ubicacionPrincipal = window.scrollY;
+        let nav = document.querySelector('nav');
+        const umbralDeslizamiento = 25; 
+
+        window.onscroll = function() {
+            let desplazamientoActual = window.scrollY;
+            if (window.innerWidth <= 768) {
+                let diferencia = Math.abs(desplazamientoActual - ubicacionPrincipal);
+                if (diferencia > umbralDeslizamiento) {
+                    if (ubicacionPrincipal > desplazamientoActual) {
+                        nav.style.top = '0';
+                    } else {
+                        nav.style.top = '-350px'; 
+                    }
+                    ubicacionPrincipal = desplazamientoActual;
+                }
+            } else {
+                nav.style.top = '0';
+                ubicacionPrincipal = desplazamientoActual;
+            }
+        }
+    </script>
+</body>
+</html>

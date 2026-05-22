@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Utilidad - Proyecto EGI-1</title>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <h1 data-es="APM Solutions" data-en="APM Solutions">APM Solutions</h1>
+    </header>
+
+    <nav>
+        <a href="index.html" data-es="Funcionamiento Grúa" data-en="Crane Operation">Funcionamiento Grúa</a>
+        <a href="utilidad.html" class="active" data-es="Utilidad" data-en="Utility">Utilidad</a>
+        <a href="fundamentos.html" data-es="Fundamentos Teóricos" data-en="Theoretical Foundations">Fundamentos Teóricos</a>
+        <a href="construccion.html" data-es="Proceso de Construcción" data-en="Construction Process">Proceso de Construcción</a>
+        <a href="quienes-somos.html" data-es="Quiénes Somos" data-en="About Us">Quiénes Somos</a>
+        
+       <div class="lang-selector">
+            <button onclick="cambiarIdioma('es')" id="btn-es" class="btn-lang active-lang" title="Español">
+                <img src="https://flagcdn.com/w40/es.png" alt="ES" class="flag-img">
+            </button>
+            <button onclick="cambiarIdioma('en')" id="btn-en" class="btn-lang" title="English">
+                <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="flag-img">
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h2 data-es="2. Idea General y Objetivos" data-en="2. General Idea and Objectives">2. Idea General y Objetivos</h2>
+            
+            <h3 data-es="2.1 Objetivo Principal" data-en="2.1 Main Objective">2.1 Objetivo Principal</h3>
+            <p data-es="El objetivo de nuestro proyecto es construir una grúa funcional a escala, aplicando y unificando los aprendizajes prácticos y técnicos obtenidos durante el cursado de los distintos espacios curriculares."
+               data-en="The objective of our project is to construct a functional scale-model crane, applying and unifying the practical and technical knowledge acquired throughout the different curricular spaces.">El objetivo de nuestro proyecto es construir una grúa funcional a escala, aplicando y unificando los aprendizajes prácticos y técnicos obtenidos durante el cursado de los distintos espacios curriculares.</p>
+            
+            <h3 data-es="2.2 Componentes del Sistema" data-en="2.2 System Components">2.2 Componentes del Sistema</h3>
+            <p data-es="Para complementar la simulación de logística y transporte de carga, el proyecto integra una estación compuesta por:"
+               data-en="To complement the logistics and cargo transport simulation, the project integrates a station composed of:">Para complementar la simulación de logística y transporte de carga, el proyecto integra una estación compuesta por:</p>
+            <ul>
+                <li data-es="Una grúa de torre giratoria con electroimán rectificado." data-en="A rotating tower crane with a rectified electromagnet.">Una grúa de torre giratoria con electroimán rectificado.</li>
+                <li data-es="Dos camiones a control remoto encargados del traslado terrestre de los contenedores." data-en="Two remote-controlled trucks responsible for land transport of the containers.">Dos camiones a control remoto encargados del traslado terrestre de los contenedores.</li>
+                <li data-es="Una interfaz y página web programada en Visual Studio para la documentación e interacción del proyecto." data-en="An interface and website programmed in Visual Studio for project documentation and interaction.">Una interfaz y página web programada en Visual Studio para la documentación e interacción del proyecto.</li>
+            </ul>
+        </article>
+    </main>
+
+    <script>
+        function cambiarIdioma(lang) {
+            localStorage.setItem('idiomaPreferido', lang);
+            document.querySelectorAll('[data-es]').forEach(elemento => {
+                elemento.textContent = elemento.getAttribute(`data-${lang}`);
+            });
+            document.getElementById('btn-es').classList.remove('active-lang');
+            document.getElementById('btn-en').classList.remove('active-lang');
+            document.getElementById(`btn-${lang}`).classList.add('active-lang');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const idiomaGuardado = localStorage.getItem('idiomaPreferido') || 'es';
+            cambiarIdioma(idiomaGuardado);
+        });
+
+        let ubicacionPrincipal = window.scrollY;
+        let nav = document.querySelector('nav');
+        const umbralDeslizamiento = 25; 
+
+        window.onscroll = function() {
+            let desplazamientoActual = window.scrollY;
+            if (window.innerWidth <= 768) {
+                let diferencia = Math.abs(desplazamientoActual - ubicacionPrincipal);
+                if (diferencia > umbralDeslizamiento) {
+                    if (ubicacionPrincipal > desplazamientoActual) {
+                        nav.style.top = '0';
+                    } else {
+                        nav.style.top = '-350px'; 
+                    }
+                    ubicacionPrincipal = desplazamientoActual;
+                }
+            } else {
+                nav.style.top = '0';
+                ubicacionPrincipal = desplazamientoActual;
+            }
+        }
+    </script>
+</body>
+</html>
